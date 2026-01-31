@@ -13,7 +13,6 @@ dependencies = [
     "bs4>=0.0.1",
     "requests>=2.27.1",
 ]
-packages = [{include = "app"}]
 [tool.poetry]
 # Keep this if you still use Poetry locally
 name = "backend"
@@ -34,3 +33,7 @@ requests = "^2.27.1"
 [build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
+[tool.uv]
+# This prevents the "Failed to build backend" error by 
+# telling uv NOT to try and install your 'app' folder as a library.
+package = false
