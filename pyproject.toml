@@ -2,11 +2,8 @@
 name = "backend"
 version = "0.1.0"
 description = "Server Side API (nextsalah.com)"
-authors = [
-    { name = "ismail424", email = "cicas03@hotmail.com" }
-]
-license = { text = "MIT" }
-requires-python = ">=3.8"
+readme = "README.md"
+requires-python = ">=3.12"
 dependencies = [
     "httptools>=0.4.0",
     "uvicorn>=0.17.6",
@@ -14,15 +11,25 @@ dependencies = [
     "Jinja2>=3.1.1",
     "aiofiles>=0.8.0",
     "bs4>=0.0.1",
-    "requests>=2.27.1"
+    "requests>=2.27.1",
 ]
 
 [tool.poetry]
-# You can keep this section if you still use poetry locally
+# Keep this if you still use Poetry locally
 name = "backend"
 version = "0.1.0"
 description = "Server Side API (nextsalah.com)"
 authors = ["ismail424 <cicas03@hotmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+httptools = "^0.4.0"
+uvicorn = "^0.17.6"
+fastapi = "^0.75.1"
+Jinja2 = "^3.1.1"
+aiofiles = "^0.8.0"
+bs4 = "^0.0.1"
+requests = "^2.27.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
