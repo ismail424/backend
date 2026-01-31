@@ -11,42 +11,41 @@ def daterange(start_date, end_date):
 class VaktijaEU():
     """
     VaktijaEU is a wrapper around the VaktijaEU API.
-    """    
-    
+    """
+
     def get_prayertimes(location_slug):
         """
         Returns the prayertimes for a given location.
         """
-        url = f"https://api.vaktija.eu/v1/locations/slug/{location_slug}"
+        url = f"https://api.vaktija.eu/v3/locations/slug/{location_slug}"
         result = {"success": False, "prayertimes": []}
         try:
             response = requests.get(url).json()
-            months =  response["data"]["months"]
+            months = response["data"]["months"]
             timestamp = str(datetime.date.today().year)
             for month in months:
                 current_month = str(month).zfill(2)
-                for days in months[month]:
-                    for day in months[month]["days"]:
-                        current_day = str(day).zfill(2)
-                        current_date =f"{timestamp}-{current_month}-{current_day}"
-                        the_prayertimes = months[month]["days"][day]["prayers"]
-                        result["prayertimes"].append({
-                            "date": current_date,
-                            "fajr": the_prayertimes[0],
-                            "sunrise": the_prayertimes[1],
-                            "dhuhr": the_prayertimes[2],
-                            "asr": the_prayertimes[3],
-                            "maghrib": the_prayertimes[4],
-                            "isha": the_prayertimes[5]
-                        })
+                for day in months[month]["days"]:
+                    current_day = str(day).zfill(2)
+                    current_date = f"{timestamp}-{current_month}-{current_day}"
+                    day_data = months[month]["days"][day]
+                    result["prayertimes"].append({
+                        "date": current_date,
+                        "fajr": day_data["fajr"],
+                        "sunrise": day_data["sunrise"],
+                        "dhuhr": day_data["dhuhr"],
+                        "asr": day_data["asr"],
+                        "maghrib": day_data["maghrib"],
+                        "isha": day_data["isha"]
+                    })
             result["success"] = True
-            
+
         except Exception as e:
             print(e)
             result["success"] = False
-        
+
         return result
-        
+
     def get_locations():
         """
         Returns the available locations.
@@ -57,7 +56,7 @@ class VaktijaEU():
         except:
             try:
                 # Send a request to the VaktijaEU API to get the locations
-                return requests.get("https://api.vaktija.eu/v1/locations").json()
+                return requests.get("https://api.vaktija.eu/v3/locations").json()
             except:
                 return None
 
