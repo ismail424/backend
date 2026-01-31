@@ -13,7 +13,7 @@ dependencies = [
     "bs4>=0.0.1",
     "requests>=2.27.1",
 ]
-
+packages = [{include = "app"}]
 [tool.poetry]
 # Keep this if you still use Poetry locally
 name = "backend"
@@ -32,5 +32,5 @@ bs4 = "^0.0.1"
 requests = "^2.27.1"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
